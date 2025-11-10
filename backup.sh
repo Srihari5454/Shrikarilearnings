@@ -60,13 +60,10 @@ TIMESTAMP="$(date '+%Y-%m-%d_%H-%M-%S')"
 DAY_OF_WEEK=$(date +%u)
 DAY_OF_MONTH=$(date +%d)
 
-if [[ "$DAY_OF_MONTH" -eq 1 ]]; then
-  BACKUP_TYPE="monthly"
-elif [[ "$DAY_OF_WEEK" -eq 7 ]]; then
-  BACKUP_TYPE="weekly"
-else
-  BACKUP_TYPE="daily"
-fi
+LOG_FILE="backup.log"      # stored inside BACKUP_DESTINATION
+EMAIL_FILE="email.txt"     # stored inside reports/
+REPORT_DIR="$PWD/../reports"
+REPORT_FILE="backup-summary-$(date +%Y-%m-%d).txt"
 
 BACKUP_PATH="$BACKUP_DIR/$BACKUP_TYPE/backup-${TIMESTAMP}.tar.gz"
 log "Starting $BACKUP_TYPE backup for $SOURCE ..."
